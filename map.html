@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Svein</title>
+  	<meta charset="utf-8" />
+
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <style>
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+    html, body, #map {
+        height: 100%;
+    }
+    
+    .info {
+        padding: 6px 8px;
+        font: 14px/16px Arial, Helvetica, sans-serif;
+        background: white;
+        background: rgba(255,255,255,0.8);
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        border-radius: 5px;
+    }
+    .info h4 {
+        margin: 0 0 5px;
+        color: #777;
+    }
+
+    </style>
+    
+</head>
+<body>
+    <div id="map"></div>
+
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+
+    <script>
+    
+    var map = new L.Map('map', {
+        minZoom: 2,
+        maxZoom: 20,
+        crs: L.CRS.EPSG3857
+    }).setView([58.996,5.621], 13);
+    
+    var osmlayer = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    
+    var notopolayer = new L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
+        layers: 'topo2',
+        format: 'image/png',
+        attribution: '<a href="http://kartverket.no/">Kartverket</a>',
+        transparent: false
+    });
+    
+    var baseMaps = {
+        "OpenStreetMap": osmlayer,
+        "Topografisk Norgeskart": notopolayer,
+    };
+    var overlayMaps = {
+    };
+
+    var layerControl = L.control.layers(baseMaps, overlayMaps);
+    layerControl.addTo(map);
+    
+    var prefix = '/';
+    
+    // ...?table=tableName will turn on this table only. if no table argument, all will be turned on
+    var tableArgument = urlParameter("table");
+    if (tableArgument) {
+        addLayer(tableArgument);
+    } else {
+        $.get(prefix + 'table', function( data ) {
+            for (var layerIndex in data) {
+                addLayer(data[layerIndex].name);
+            }
+        });
+    }
+
+    function addLayer(name) {
+        var layer = L.tileLayer(prefix + 'tile/' + name + '/{z}/{x}/{y}.png', {
+            attribution: '<a href="http://www.landsbytrippelen.no/">Landsbytrippelen</a>'
+        }).addTo(map);
+        layerControl.addOverlay(layer, name);
+    }
+    
+    function urlParameter(n) {
+        // http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+        var half = location.search.split(n + '=')[1];
+        return half !== undefined ? decodeURIComponent(half.split('&')[0]) : null;
+    }
+    
+    L.control.scale({imperial: false, maxWidth: 200}).addTo(map);
+
+    </script>
+</body>
+</html>
