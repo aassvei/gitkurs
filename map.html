@@ -85,7 +85,6 @@
 
     function addLayer(name) {
         var layer = L.tileLayer(prefix + 'tile/' + name + '/{z}/{x}/{y}.png', {
-            attribution: '<a href="http://www.landsbytrippelen.no/">Landsbytrippelen</a>'
         }).addTo(map);
         layerControl.addOverlay(layer, name);
     }
