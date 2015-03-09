@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <head>
 	<title>Sveins kart no 1</title>
@@ -32,7 +32,7 @@ L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
 				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'examples.map-i875mjb7'
-		}).addTo(map);
+		});
 
 var notopolayer = new 
 L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
@@ -40,11 +40,11 @@ L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
         format: 'image/png',
         attribution: '<a href="http://kartverket.no/">Kartverket</a>',
         transparent: false
-    });
+    }).addTo(map);
 
 var baseMaps = {
     "OpenStreetMap": osmlayer,
-	"Topografisk Norgeskart": notopolayer
+    "Topografisk Norgeskart": notopolayer
 };
 
 var overlayMaps = {
