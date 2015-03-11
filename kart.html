@@ -40,11 +40,22 @@ L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
         format: 'image/png',
         attribution: '<a href="http://kartverket.no/">Kartverket</a>',
         transparent: false
+
+    });
+
+var nosjolayer = new 
+L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
+        layers: 'sjo_hovedkart2',
+        format: 'image/png',
+        attribution: '<a href="http://kartverket.no/">Kartverket</a>',
+        transparent: false
+
     }).addTo(map);
 
 var baseMaps = {
     "OpenStreetMap": osmlayer,
-    "Topografisk Norgeskart": notopolayer
+    "Topografisk Norgeskart": notopolayer,
+    "Sjokart": nosjolayer
 };
 
 var overlayMaps = {
