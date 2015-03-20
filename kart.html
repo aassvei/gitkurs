@@ -23,7 +23,10 @@
 	<div id="map"></div>
 
 	<script>
-		var map = L.map('map');
+		var map = L.map('map', {
+    center: [58.97, 5.73],
+    zoom: 13
+	});
 
 		var osmlayer =
 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -41,7 +44,7 @@ L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
         attribution: '<a href="http://kartverket.no/">Kartverket</a>',
         transparent: false
 
-    });
+    }).addTo(map);
 
 var nosjolayer = new 
 L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
@@ -50,15 +53,22 @@ L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
         attribution: '<a href="http://kartverket.no/">Kartverket</a>',
         transparent: false
 
-    }).addTo(map);
+    });
 
+var Sykkelruterlayer = 	
+L.tileLayer('http://svein.maplytic.no/tile/Sykkelruter/{z}/{x}/{y}.png').addTo(map);
+    
+	
 var baseMaps = {
     "OpenStreetMap": osmlayer,
     "Topografisk Norgeskart": notopolayer,
     "Sjokart": nosjolayer
-};
+	
+	};
 
 var overlayMaps = {
+"Sykkelruter": Sykkelruterlayer 
+
 };
 
 L.control.layers(baseMaps, overlayMaps).addTo(map);
