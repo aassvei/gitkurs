@@ -55,8 +55,11 @@ L.TileLayer.WMS("http://opencache.statkart.no/gatekeeper/gk/gk.open", {
 
     });
 
-var Sykkelruterlayer = 	
-L.tileLayer('http://svein.maplytic.no/tile/Sykkelruter/{z}/{x}/{y}.png').addTo(map);
+var TorsdagTrillenlayer = 	
+L.tileLayer('http://svein.maplytic.no/tile/TorsdagTrillen/{z}/{x}/{y}.png').addTo(map);
+
+var Landsbyrittetlayer = 	
+L.tileLayer('http://svein.maplytic.no/tile/Landsbyrittet/{z}/{x}/{y}.png').addTo(map);
     
 	
 var baseMaps = {
@@ -67,7 +70,8 @@ var baseMaps = {
 	};
 
 var overlayMaps = {
-"Sykkelruter": Sykkelruterlayer 
+"TorsdagTrillen": TorsdagTrillenlayer,
+"Landsbyrittet Lang Løype": Landsbyrittetlayer 
 
 };
 
