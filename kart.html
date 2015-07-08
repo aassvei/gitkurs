@@ -60,6 +60,9 @@ L.tileLayer('http://svein.maplytic.no/tile/TorsdagTrillen/{z}/{x}/{y}.png').addT
 
 var Landsbyrittetlayer = 	
 L.tileLayer('http://svein.maplytic.no/tile/Landsbyrittet/{z}/{x}/{y}.png');
+
+var Interessepunkterlayer= 	
+L.tileLayer('http://svein.maplytic.no/tile/Interessepunkter/{z}/{x}/{y}.png');
     
 	
 var baseMaps = {
@@ -71,7 +74,8 @@ var baseMaps = {
 
 var overlayMaps = {
 "TorsdagTrillen": TorsdagTrillenlayer,
-"Landsbyrittet Lang Løype": Landsbyrittetlayer 
+"Landsbyrittet Lang Løype": Landsbyrittetlayer,
+"Interessepunkter": Interessepunkterlayer 
 
 };
 
